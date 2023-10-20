@@ -19,10 +19,10 @@ public class EnemyAI : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.tag == "Bullet")
         {
             // Deal damage
             EnemyHealth enemyHealth = GetComponent<EnemyHealth>();

@@ -96,11 +96,11 @@ public class PlayerController : MonoBehaviour
         trailRenderer.enabled = false; // Disable TrailRenderer after dashing
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (!isInvincible)
         {
-            if (collision.gameObject.CompareTag("Enemy"))
+            if (collision.tag == "Enemy")
             {
                 // Deal damage to the player
                 PlayerHealth playerHealth = GetComponent<PlayerHealth>();

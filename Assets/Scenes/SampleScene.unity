@@ -252,7 +252,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15.82388
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -279,7 +279,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -493,8 +493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2154104296240209012, guid: 9f365c7f522703a45b713778940aeed3, type: 3}
-  spawnInterval: 3
-  spawnRadius: 10
+  spawnInterval: 1.2
+  spawnRadius: 37.94
 --- !u!1 &1724966696
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,8 +645,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDamage: 1
   invincibilityTime: 1
-  moveSpeed: 6
-  dashSpeed: 4
+  moveSpeed: 30
+  dashSpeed: 15
   trailRenderer: {fileID: 1724966697}
 --- !u!212 &1724966699
 SpriteRenderer:
@@ -710,7 +710,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1232, y: 0.0146, z: 0}
-  m_LocalScale: {x: 0.7536, y: 0.9795, z: 1}
+  m_LocalScale: {x: 2.89, y: 4.02, z: 4.02}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 925420484}
