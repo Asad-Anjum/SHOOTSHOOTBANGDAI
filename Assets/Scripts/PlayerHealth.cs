@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 5;
-    private int currentHealth;
+    public int currentHealth;
     public TMP_Text healthText;
 
     void Start()
@@ -33,6 +33,14 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Heal(int amount)
+    {
+        // Ensure the player's health doesn't exceed the maximum
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        UpdateHealthUI();
+        Debug.Log("Heal Performed");
     }
 }
 

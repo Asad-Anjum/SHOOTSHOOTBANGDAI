@@ -511,6 +511,7 @@ GameObject:
   - component: {fileID: 1724966702}
   - component: {fileID: 1724966703}
   - component: {fileID: 1724966704}
+  - component: {fileID: 1724966705}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -729,6 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
+  currentHealth: 0
   healthText: {fileID: 714779015}
 --- !u!50 &1724966702
 Rigidbody2D:
@@ -821,6 +823,23 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3720538572019296414, guid: 892c05ed33aad52479f6de63b4416099, type: 3}
   fireRate: 10
   bulletSpeed: 80
+--- !u!114 &1724966705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724966696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fdb8be678355ae43a4b4455e7bd3597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target_player: {fileID: 1724966696}
+  playerMovement: {fileID: 1724966698}
+  playerHealth: {fileID: 1724966701}
+  healingRate: 1
+  cooldownTime: 5
 --- !u!1 &1979624659
 GameObject:
   m_ObjectHideFlags: 0

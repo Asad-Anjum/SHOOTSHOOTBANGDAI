@@ -9,12 +9,19 @@ public class PlayerController : MonoBehaviour
     private bool isInvincible = false;
     private float invincibilityTimer = 0.0f;
 
-    public float moveSpeed = 5.0f;
+    public float normalSpeed = 10.0f;
+    private float moveSpeed;
     public float dashSpeed = 10.0f;
     public TrailRenderer trailRenderer;
 
     private bool isDashing = false;
 
+
+    void Start()
+    {
+        // Initialize the current speed to the normal speed
+        moveSpeed = normalSpeed;
+    }
     void Update()
     {
         // Player movement
@@ -117,6 +124,18 @@ public class PlayerController : MonoBehaviour
                 // Handle other effects for the player, such as knockback or temporary invincibility frames.
             }
         }
+    }
+
+    public void SetSpeed(float newSpeed)
+    {
+        // Set the player's speed to the provided value
+        moveSpeed = newSpeed;
+    }
+
+    public void RestoreSpeed()
+    {
+        // Restore the player's speed to the normal speed
+        moveSpeed = normalSpeed;
     }
 
 }
