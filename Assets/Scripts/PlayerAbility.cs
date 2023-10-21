@@ -15,6 +15,12 @@ public class PlayerAbility : MonoBehaviour
     //Teleport Variables
     public float cooldownTime = 5f; // Cooldown time in seconds
     private bool canTeleport = true;
+
+    //Freeze Variables
+    public float FreezecooldownTime = 10f; // Cooldown time in seconds
+    public float freezeDuration = 3f; // Duration of the freeze effect
+
+    private bool canUseFreeze = true;
     void Update()
     {
         if (isHealing)
@@ -52,9 +58,10 @@ public class PlayerAbility : MonoBehaviour
             TeleportToMouse();
         }
 
-        if (Input.GetKey(KeyCode.R))
+         if (Input.GetKeyDown(KeyCode.R) && canUseFreeze)
         {
-            Freeze();
+            // Activate the freeze ability
+            ActivateFreeze();
         }
     }
 
@@ -98,8 +105,29 @@ public class PlayerAbility : MonoBehaviour
         canTeleport = true;
     }
 
-    public void Freeze()
+    //code for freeze
+    void ActivateFreeze()
     {
+        // Find all enemy objects in the scene
+        EnemyAI[] enemies = FindObjectsOfType<EnemyAI>();
 
+        // Freeze the movement of each enemy
+        foreach (EnemyAI enemy in enemies)
+        {
+            enemy.FreezeMovement(freezeDuration);
+        }
+
+        // Disable the freeze ability temporarily while on cooldown
+        canUseFreeze = false;
+        StartCoroutine(FreezeCooldown());
+    }
+
+    IEnumerator FreezeCooldown()
+    {
+        // Wait for the cooldown time
+        yield return new WaitForSeconds(FreezecooldownTime);
+
+        // Re-enable the freeze ability
+        canUseFreeze = true;
     }
 }

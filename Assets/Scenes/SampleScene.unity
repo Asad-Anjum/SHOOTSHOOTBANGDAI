@@ -646,7 +646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDamage: 1
   invincibilityTime: 1
-  moveSpeed: 30
+  normalSpeed: 5
   dashSpeed: 15
   trailRenderer: {fileID: 1724966697}
 --- !u!212 &1724966699

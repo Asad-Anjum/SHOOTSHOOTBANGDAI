@@ -8,15 +8,23 @@ public class EnemyAI : MonoBehaviour
     private Transform player;
     private int enemyDamage = 1;
 
+    //Freeze ability
+    private bool isFrozen = false;
+    private float originalSpeed;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform; // Assign the player's transform
+        originalSpeed = moveSpeed;
     }
 
     void Update()
     {
         // Move towards the player
-        transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        if (!isFrozen)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -35,5 +43,23 @@ public class EnemyAI : MonoBehaviour
                
         }
         
+    }
+
+    public void FreezeMovement(float duration)
+    {
+        // Freeze the enemy's movement for the specified duration.
+        isFrozen = true;
+        moveSpeed = 0; // Set speed to 0 to freeze movement temporarily.
+
+        StartCoroutine(UnfreezeAfterDuration(duration));
+    }
+
+    IEnumerator UnfreezeAfterDuration(float duration)
+    {
+        // Wait for the specified duration and then unfreeze the enemy.
+        yield return new WaitForSeconds(duration);
+
+        isFrozen = false;
+        moveSpeed = originalSpeed; // Restore the original speed.
     }
 }
