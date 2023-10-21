@@ -7,6 +7,7 @@ public class PlayerShooting : MonoBehaviour
     public float fireRate;
     private float nextFireTime;
     public float bulletSpeed = 80f;
+    public AudioSource shootSound;
 
     void Update()
     {
@@ -25,6 +26,7 @@ public class PlayerShooting : MonoBehaviour
         // Apply force to move the projectile
         rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
 
+        shootSound.Play();
         // You can add additional logic, like setting the damage value, collision handling, and visual effects.
 
         Destroy(projectile, 2.0f); // Destroy the projectile after some time or when it hits something.

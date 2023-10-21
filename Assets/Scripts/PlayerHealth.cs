@@ -9,6 +9,8 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 5;
     public int currentHealth;
     public TMP_Text healthText;
+    public AudioSource PlayerHurt;
+    public AudioSource PlayerDead;
 
     void Start()
     {
@@ -26,7 +28,10 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthUI();
         if (currentHealth <= 0)
         {
+            PlayerDead.Play();
             Die(); // You can implement a "Die" method to handle player death.
+        } else {
+            PlayerHurt.Play();
         }
     }
 
@@ -40,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
         // Ensure the player's health doesn't exceed the maximum
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
         UpdateHealthUI();
-        Debug.Log("Heal Performed");
+        //Debug.Log("Heal Performed");
     }
 }
 

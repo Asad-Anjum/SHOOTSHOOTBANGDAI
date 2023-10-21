@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour
     //Freeze ability
     private bool isFrozen = false;
     private float originalSpeed;
+    public AudioSource hurtSound;
 
     void Start()
     {
@@ -33,11 +34,13 @@ public class EnemyAI : MonoBehaviour
         if (collision.tag == "Bullet")
         {
             // Deal damage
+
             EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(enemyDamage);
                 Destroy(collision.gameObject);
+                hurtSound.Play();
             }
 
                

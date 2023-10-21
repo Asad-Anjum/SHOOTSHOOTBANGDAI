@@ -11,14 +11,21 @@ public class PlayerAbility : MonoBehaviour
     public float healingRate = 1f; // Healing rate in HP per second
     private bool isHealing = false;
     private float timer = 0;
+    public AudioSource HealStart;
+    public AudioSource Healing;
+    public AudioSource HealEnd;
+
+    
 
     //Teleport Variables
     public float cooldownTime = 5f; // Cooldown time in seconds
     private bool canTeleport = true;
+    public AudioSource teleportSound;
 
     //Freeze Variables
     public float FreezecooldownTime = 10f; // Cooldown time in seconds
     public float freezeDuration = 3f; // Duration of the freeze effect
+    public AudioSource FreezeSound;
 
     private bool canUseFreeze = true;
     void Update()
@@ -48,6 +55,7 @@ public class PlayerAbility : MonoBehaviour
         if (isHealing && timer > 2.0f)
         {
             //Debug.Log("Heal Performed");
+            Healing.Play();
             playerHealth.Heal(1);
             timer = 0;
         }
@@ -70,12 +78,14 @@ public class PlayerAbility : MonoBehaviour
     {
         // Check if the player's health is not already at the maximum
         //Debug.Log("Speed Change!");
+        HealStart.Play();
         isHealing = true;
         playerMovement.SetSpeed(1f); // Set player's speed to 1 (or any other reduced speed)
     }
 
     void StopHealing()
     {
+        HealEnd.Play();
         isHealing = false;
         playerMovement.RestoreSpeed(); // Restore the player's original speed
     }
@@ -87,10 +97,11 @@ public class PlayerAbility : MonoBehaviour
         // Get the current mouse position in world coordinates
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = transform.position.z;
-        Debug.Log("Mouse Position: " + mousePosition);
+        //Debug.Log("Mouse Position: " + mousePosition);
         
         // Teleport the player to the mouse position
         transform.position = mousePosition;
+        teleportSound.Play();
 
         // Disable teleportation temporarily while on cooldown
         canTeleport = false;
@@ -116,7 +127,7 @@ public class PlayerAbility : MonoBehaviour
         {
             enemy.FreezeMovement(freezeDuration);
         }
-
+        FreezeSound.Play();
         // Disable the freeze ability temporarily while on cooldown
         canUseFreeze = false;
         StartCoroutine(FreezeCooldown());

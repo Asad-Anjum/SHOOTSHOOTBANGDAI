@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
 
 
+
     void Start()
     {
         // Initialize the current speed to the normal speed
