@@ -48,16 +48,10 @@ public class PlayerAbility : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && canTeleport)
         {
-            // Raycast from the mouse position to determine the teleport target
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                // Perform the teleportation
-                Teleport(hit.point);
-            }
+            // Teleport to the mouse position
+            TeleportToMouse();
         }
+
         if (Input.GetKey(KeyCode.R))
         {
             Freeze();
@@ -81,14 +75,19 @@ public class PlayerAbility : MonoBehaviour
 
 
     //code for Teleport
-    void Teleport(Vector3 teleportPosition)
+    void TeleportToMouse()
     {
+        // Get the current mouse position in world coordinates
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = transform.position.z;
+        Debug.Log("Mouse Position: " + mousePosition);
+        
+        // Teleport the player to the mouse position
+        transform.position = mousePosition;
+
         // Disable teleportation temporarily while on cooldown
         canTeleport = false;
         StartCoroutine(TeleportCooldown());
-
-        // Move the player to the teleport position
-        transform.position = teleportPosition;
     }
     IEnumerator TeleportCooldown()
     {
