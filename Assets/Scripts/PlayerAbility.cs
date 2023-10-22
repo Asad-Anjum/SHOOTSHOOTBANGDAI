@@ -27,6 +27,7 @@ public class PlayerAbility : MonoBehaviour
     public float freezeDuration = 3f; // Duration of the freeze effect
     public AudioSource FreezeSound;
 
+
     private bool canUseFreeze = true;
     void Update()
     {

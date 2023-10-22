@@ -12,11 +12,14 @@ public class EnemyAI : MonoBehaviour
     private bool isFrozen = false;
     private float originalSpeed;
     public AudioSource hurtSound;
+    public GameObject freezeParticlesObject;
+    private ParticleSystem freezeParticles;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform; // Assign the player's transform
         originalSpeed = moveSpeed;
+        freezeParticles = freezeParticlesObject.GetComponent<ParticleSystem>();
     }
 
     void Update()
@@ -54,6 +57,7 @@ public class EnemyAI : MonoBehaviour
         isFrozen = true;
         moveSpeed = 0; // Set speed to 0 to freeze movement temporarily.
 
+        freezeParticles.Play();
         StartCoroutine(UnfreezeAfterDuration(duration));
     }
 
