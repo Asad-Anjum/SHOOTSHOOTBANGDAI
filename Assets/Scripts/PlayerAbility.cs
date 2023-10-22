@@ -6,29 +6,38 @@ public class PlayerAbility : MonoBehaviour
 {
     public GameObject target_player;
     //Healling Variables
+    [Header("Healing Variables")]
     public PlayerController playerMovement; // Reference to the PlayerMovement script
     public PlayerHealth playerHealth; // Reference to the PlayerHealth script
     public float healingRate = 1f; // Healing rate in HP per second
     private bool isHealing = false;
     private float timer = 0;
     public AudioSource HealStart;
-    public AudioSource Healing;
     public AudioSource HealEnd;
 
     
 
     //Teleport Variables
+    [Header("Teleport Variables")]
     public float cooldownTime = 5f; // Cooldown time in seconds
     private bool canTeleport = true;
     public AudioSource teleportSound;
+    public GameObject teleportParticlesObject;
+    private ParticleSystem teleportParticles;
 
     //Freeze Variables
+    [Header("Freeze Variables")]
     public float FreezecooldownTime = 10f; // Cooldown time in seconds
     public float freezeDuration = 3f; // Duration of the freeze effect
     public AudioSource FreezeSound;
 
 
     private bool canUseFreeze = true;
+
+    void Start()
+    {
+        teleportParticles = teleportParticlesObject.GetComponent<ParticleSystem>();
+    }
     void Update()
     {
         if (isHealing)
@@ -56,7 +65,6 @@ public class PlayerAbility : MonoBehaviour
         if (isHealing && timer > 2.0f)
         {
             //Debug.Log("Heal Performed");
-            Healing.Play();
             playerHealth.Heal(1);
             timer = 0;
         }
@@ -64,6 +72,7 @@ public class PlayerAbility : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && canTeleport)
         {
             // Teleport to the mouse position
+            teleportParticles.Play();
             TeleportToMouse();
         }
 

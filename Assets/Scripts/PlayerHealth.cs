@@ -15,10 +15,18 @@ public class PlayerHealth : MonoBehaviour
     //screenEffect reference
     private CameraEffect screen;
 
+    //Particle Effect
+    public GameObject healParticlesObject;
+    private ParticleSystem healParticles;
+
+    //Sound Effect
+    public AudioSource Healing;
+
     void Start()
     {
         currentHealth = maxHealth;
         screen = Camera.main.GetComponent<CameraEffect>();
+        healParticles = healParticlesObject.GetComponent<ParticleSystem>();
     }
 
     void UpdateHealthUI()
@@ -52,6 +60,11 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(int amount)
     {
         // Ensure the player's health doesn't exceed the maximum
+        if (currentHealth < maxHealth)
+        {
+            healParticles.Play();
+            Healing.Play();
+        }
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
         UpdateHealthUI();
         //Debug.Log("Heal Performed");
