@@ -11,10 +11,14 @@ public class PlayerHealth : MonoBehaviour
     public TMP_Text healthText;
     public AudioSource PlayerHurt;
     public AudioSource PlayerDead;
+    
+    //screenEffect reference
+    private CameraEffect screen;
 
     void Start()
     {
         currentHealth = maxHealth;
+        screen = Camera.main.GetComponent<CameraEffect>();
     }
 
     void UpdateHealthUI()
@@ -26,12 +30,17 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= damage;
         UpdateHealthUI();
+        screen.Shake();
         if (currentHealth <= 0)
         {
             PlayerDead.Play();
             Die(); // You can implement a "Die" method to handle player death.
         } else {
             PlayerHurt.Play();
+            if (currentHealth < 3)
+            {
+                screen.Flash();
+            }
         }
     }
 
